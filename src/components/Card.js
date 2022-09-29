@@ -1,9 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { typeColors } from "../colors";
 
 const Card = ({ pokemon }) => {
+  const pokemonColor = typeColors[pokemon.types[0].type.name];
+
   return (
-    <div className="w-64 max-w-sm bg-white rounded-lg shadow-md my-5 mx-2 dark:bg-gray-800 dark:border-gray-700 hover:scale-105 ease-in-out duration-300">
+    <div
+      className="w-64 max-w-sm  rounded-lg shadow-md my-5 mx-2  hover:scale-105 ease-in-out duration-300"
+      style={{ backgroundColor: pokemonColor }}
+    >
       <Link to={`/${pokemon.name}`}>
         <img
           className="p-8 rounded-t-lg"

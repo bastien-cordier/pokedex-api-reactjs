@@ -4,7 +4,7 @@ import "./App.scss";
 
 function App() {
   return (
-    <div className="App bg-slate-100 dark:bg-slate-600">
+    <div className="App">
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Pokedex />} />

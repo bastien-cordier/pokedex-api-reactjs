@@ -4,6 +4,7 @@ import Card from "../components/Card";
 
 export default function Pokedex() {
   const [pokedex, setPokedex] = useState([]);
+  const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -31,10 +32,30 @@ export default function Pokedex() {
         {loading ? (
           <div>Catch</div>
         ) : (
-          <div className="flex justify-evenly flex-wrap mx-10">
-            {pokedex.map((pokemon, i) => (
-              <Card key={i} pokemon={pokemon} />
-            ))}
+          <div className="mx-10">
+            <label htmlFor="search">
+              <input
+                type="search"
+                placeholder="Search your pokemon..."
+                className="py-3 px-4 rounded-xl w-60 hover:scale-105 ease-in-out duration-300"
+                onChange={(e) => {
+                  setSearch(e.target.value);
+                }}
+              />
+            </label>
+            <div className="flex justify-evenly flex-wrap">
+              {pokedex
+                .filter((pokemon) => {
+                  if (search === "") {
+                    return pokemon;
+                  } else if (pokemon.name.toLowerCase().includes(search.toLowerCase())) {
+                    return pokemon;
+                  }
+                })
+                .map((pokemon, i) => (
+                  <Card key={i} pokemon={pokemon} />
+                ))}
+            </div>
           </div>
         )}
       </div>
