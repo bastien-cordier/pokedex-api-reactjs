@@ -10,7 +10,7 @@ export default function Pokedex() {
   useEffect(() => {
     setLoading(true);
     axios
-      .get("https://pokeapi.co/api/v2/pokemon/")
+      .get("https://pokeapi.co/api/v2/pokemon/?limit=150")
       .then((res) => {
         return res.data.results;
       })
@@ -20,17 +20,18 @@ export default function Pokedex() {
       .then((results) => {
         setLoading(false);
         setPokedex(results.map((res) => res.data));
-        console.log(results);
       })
       .catch((err) => console.log(err));
   }, []);
 
   return (
     <div>
-      <h1 className="py-4 px-10 text-5xl text-white font-semibold">Pokedex</h1>
+      <h1 className="py-4 px-10 text-5xl text-white font-semibold">MyPokedex.</h1>
       <div>
         {loading ? (
-          <div>Catch</div>
+          <div className="flex h-screen justify-center items-center">
+            <img src="assets/pokemonloader.gif" className="h-64" alt="loader" />
+          </div>
         ) : (
           <div className="mx-10">
             <label htmlFor="search">
@@ -43,7 +44,7 @@ export default function Pokedex() {
                 }}
               />
             </label>
-            <div className="flex justify-evenly flex-wrap">
+            <div className="flex justify-evenly flex-wrap mt-5">
               {pokedex
                 .filter((pokemon) => {
                   if (search === "") {
